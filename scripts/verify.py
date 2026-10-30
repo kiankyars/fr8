@@ -48,7 +48,6 @@ for name in ("index.md", "README.md"):
         if local.endswith(".html"):
             local = local[:-5] + ".md"
         assert (ROOT / local).exists(), (name, target)
-assert len(list((ROOT / "figures").glob("*.svg"))) == 4
-assert len(list((ROOT / "figures").glob("*.png"))) == 4
-assert len(re.findall(r'!\[', (ROOT / "index.md").read_text())) == 4
+assert len(list((ROOT / "figures").glob("*.svg"))) == 3
+assert len(re.findall(r'!\[', (ROOT / "index.md").read_text())) == 3
 print("PASS: source hashes, cost records, observation/forecast split, and local links")

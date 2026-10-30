@@ -14,7 +14,7 @@
       src: url("fonts/inter-latin-600-normal.woff2") format("woff2");
       font-weight: 600; font-display: swap;
     }
-    :root { --mono: "JetBrains Mono", ui-monospace, Menlo, monospace; --dim: #8f8f8f; --line: #222; }
+    :root { --mono: "JetBrains Mono", ui-monospace, Menlo, monospace; --dim: #8f8f8f; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: #000;
@@ -28,13 +28,6 @@
     .logo { display: block; margin: 0 auto 3rem; width: 62px; height: auto; }
     a { color: #fff; text-underline-offset: 3px; }
     a:hover { color: var(--dim); }
-    h1 {
-      font-family: var(--mono);
-      font-size: 1.7rem;
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-    }
-    .updated { color: var(--dim); font-size: 0.85rem; margin-bottom: 2rem; }
     h2 {
       font-family: var(--mono);
       font-size: 1rem;
@@ -42,17 +35,6 @@
       margin: 2.4rem 0 0.7rem;
     }
     p { color: #ededed; margin-bottom: 0.9rem; }
-    ul { list-style: none; margin: 0.4rem 0 0.9rem; }
-    li { position: relative; padding-left: 1.4rem; margin-bottom: 0.5rem; color: #ededed; }
-    li::before { content: ">"; position: absolute; left: 0; color: var(--dim); }
-    .back {
-      display: inline-block;
-      margin-top: 3.5rem;
-      font-family: var(--mono);
-      font-size: 0.9rem;
-      color: var(--dim);
-    }
-    .back:hover { color: #fff; }
 
 /* Memo figures and navigation. Base typography and spacing are from fr8.so. */
 :root { color-scheme: dark; }
@@ -61,11 +43,10 @@ strong { font-weight: 600; }
 article img { display: block; width: 100%; height: auto; margin: 1.8rem 0 0.8rem; }
 article a:has(img) { display: block; }
 .caption { font-size: 0.8rem; color: var(--dim); }
-footer { border-top: 1px solid var(--line); margin-top: 4rem; padding-top: 1.5rem; font-size: 0.85rem; }
-footer a { color: var(--dim); }
+.footnotes { margin-top: 2rem; font-size: 0.8rem; color: var(--dim); }
+.footnotes ol { padding-left: 1.4rem; }
+.footnotes p { color: inherit; }
 a:focus-visible { outline: 1px solid #fff; outline-offset: 5px; }
 .skip { position: absolute; left: -9999px; }
 .skip:focus { position: fixed; left: 1rem; top: 1rem; background: #000; padding: 0.5rem; }
-pre { overflow-x: auto; }
-code { overflow-wrap: anywhere; }
-@media print { body { background: #fff; color: #000; } p, a { color: #000; } .wrap { padding: 0; } .logo, footer, .skip { display: none; } }
+@media print { body { background: #fff; color: #000; } p, a { color: #000; } .wrap { padding: 0; } .logo, .skip { display: none; } }

@@ -14,9 +14,9 @@ Global electricity consumption for all data centres; 2026–2035 values are proj
 
 Inventory and vacancy in eight United States markets. [Data and reports from Coldwell Banker Richard Ellis (CBRE)](data/figure3_capacity_vacancy.csv). Vacancy measures leasing availability.
 
-## Figure 4
+## Hardware evidence
 
-A100 introduction and contract renewal. [Data and primary sources](data/figure4_hardware_longevity.csv). Dates have calendar-year precision; the timeline describes the generation, not individual chips' operating ages.
+A100 introduction and contract renewal. [Data and primary sources](data/hardware_longevity.csv). Evidence supporting section 4; generation age does not establish individual chips' operating ages.
 
 ## Reproduce
 

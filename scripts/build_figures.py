@@ -41,8 +41,6 @@ def save(fig, name, title, description):
     fig.savefig(svg_path, bbox_inches="tight",
                 metadata={"Date": None, "Title": title, "Description": description})
     svg_path.write_text("\n".join(line.rstrip() for line in svg_path.read_text().splitlines()) + "\n")
-    fig.savefig(FIGURES / f"{name}.png", dpi=190, bbox_inches="tight",
-                metadata={"Title": title, "Description": description})
     plt.close(fig)
 
 
@@ -65,7 +63,7 @@ def inference_cost():
     ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: f"${v:g}"))
     ax.xaxis.set_major_locator(mdates.MonthLocator(interval=3))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %Y"))
-    ax.set_ylabel("Dollars per question · logarithmic scale", labelpad=12)
+    ax.set_ylabel("USD per question", labelpad=12)
     ax.legend(loc="lower left", bbox_to_anchor=(-0.02, 1.02), frameon=False, fontsize=10)
     style(ax)
     save(fig, "01-inference-cost", "Cheaper benchmark performance",
@@ -91,7 +89,7 @@ def demand():
         ax.scatter([year], [value], color=color, zorder=3)
         ax.annotate(f"{value:,.0f}", (year, value), xytext=(0, 13), textcoords="offset points",
                     ha="center", color=color, fontweight="bold")
-    ax.set_ylabel("Electricity demand · terawatt-hours per year", labelpad=12)
+    ax.set_ylabel("Electricity demand · TWh/year", labelpad=12)
     ax.set_ylim(bottom=0)
     ax.set_xlim(historical[0][0] - 0.3, forecast[-1][0] + 0.3)
     ax.set_xticks([2020, 2025, 2030, 2035])
@@ -128,36 +126,7 @@ def scarcity():
          "Reported data-centre inventory and vacancy in eight primary U.S. markets, H2 2023 through H1 2026.")
 
 
-def hardware_longevity():
-    events = {row["event_id"]: row for row in rows("figure4_hardware_longevity.csv")}
-    introduction = events["architecture_introduced"]
-    disclosure = events["renewal_disclosed"]
-    endpoint = events["contract_endpoint"]
-    start, renewal, end = [int(event["event_year"]) for event in (introduction, disclosure, endpoint)]
-    term = int(disclosure["contract_term_years"])
-
-    fig, ax = plt.subplots(figsize=(10, 3.0))
-    ax.plot([start, renewal], [0, 0], color="#555555", linewidth=3, solid_capstyle="butt")
-    ax.plot([renewal, end], [0, 0], color=GREEN, linewidth=8, solid_capstyle="butt")
-    for event, year, color in [(introduction, start, MUTED), (disclosure, renewal, GREEN), (endpoint, end, GREEN)]:
-        ax.scatter(year, 0, s=95, color=color, edgecolor=PAPER, linewidth=1.5, zorder=3)
-        ax.annotate(event["label"], (year, 0), xytext=(0, 28), textcoords="offset points",
-                    ha="center", va="bottom", color=color, fontsize=11)
-        ax.annotate(str(year), (year, 0), xytext=(0, -22), textcoords="offset points",
-                    ha="center", va="top", color=color, fontsize=13, fontweight="bold")
-    ax.text((renewal + end) / 2, -0.55,
-            f"{term}-year renewal\nAt typical 1-year pricing", ha="center", va="top",
-            color=GREEN, fontsize=11, linespacing=1.5)
-    ax.set_xlim(start - 0.9, end + 1.0)
-    ax.set_ylim(-1.0, 0.8)
-    ax.axis("off")
-    save(fig, "04-ownership", "A100 architecture and contract timeline",
-         "A100 architecture introduced in 2020; a three-year renewal disclosed in 2026 extends into 2029. "
-         "The highlighted interval is a year-level illustration, not exact contract dates or the age of individual GPUs.")
-
-
 if __name__ == "__main__":
     inference_cost()
     demand()
     scarcity()
-    hardware_longevity()
