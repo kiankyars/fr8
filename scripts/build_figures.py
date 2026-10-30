@@ -47,6 +47,7 @@ def save(fig, name, title, description):
 def inference_cost():
     records = rows("figure1_cost_records.csv")
     fig, ax = plt.subplots(figsize=(10, 5.4))
+    end_date = datetime(2026, 7, 27)
     selected = [
         ("GPQA Diamond", 0.75, GREEN, "GPQA Diamond · 75% adjusted"),
         ("AIME (OTIS Mock)", 0.75, AMBER, "AIME (OTIS Mock) · 75% adjusted"),
@@ -57,7 +58,11 @@ def inference_cost():
                          and float(r["threshold_adjusted_accuracy"]) == threshold), key=lambda r: r["date"])
         dates = [datetime.fromisoformat(r["date"]) for r in series]
         costs = [float(r["cost_usd_per_task"]) for r in series]
-        ax.step(dates, costs, where="post", color=color, linewidth=2, label=label)
+        line_dates, line_costs = dates.copy(), costs.copy()
+        if dates[-1] < end_date:
+            line_dates.append(end_date)
+            line_costs.append(costs[-1])
+        ax.step(line_dates, line_costs, where="post", color=color, linewidth=2, label=label)
         ax.scatter(dates, costs, color=color, s=20, zorder=3)
     ax.set_yscale("log")
     ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: f"${v:g}"))
@@ -67,7 +72,8 @@ def inference_cost():
     ax.legend(loc="lower left", bbox_to_anchor=(-0.02, 1.02), frameon=False, fontsize=10)
     style(ax)
     save(fig, "01-inference-cost", "Cheaper benchmark performance",
-         "Cost records at fixed chance-adjusted accuracy, in US dollars per benchmark question. Logarithmic y-axis.")
+         "Cost records at fixed chance-adjusted accuracy, in US dollars per benchmark question. Logarithmic y-axis. "
+         "Lines carry the last recorded cost forward to July 27, 2026; dots mark source records.")
 
 
 def demand():

@@ -6,6 +6,8 @@
 
 Fixed benchmark performance. [Epoch AI — Luke Emberson and David Roodman](https://epoch.ai/publications/the-plunging-price-of-thought) · [Data](data/figure1_cost_records.csv).
 
+Lines carry the last recorded cost forward to 27 July 2026; dots mark source records.
+
 ## Figure 2
 
 Global electricity consumption for all data centres; 2026–2035 values are projections. [International Energy Agency (IEA)](https://www.iea.org/data-and-statistics/charts/electricity-consumption-by-data-centres-2020-2035) · [Data](data/figure2_electricity.csv).

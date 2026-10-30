@@ -8,7 +8,7 @@
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
     <dc:title>Cheaper benchmark performance</dc:title>
-    <dc:description>Cost records at fixed chance-adjusted accuracy, in US dollars per benchmark question. Logarithmic y-axis.</dc:description>
+    <dc:description>Cost records at fixed chance-adjusted accuracy, in US dollars per benchmark question. Logarithmic y-axis. Lines carry the last recorded cost forward to July 27, 2026; dots mark source records.</dc:description>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -1099,6 +1099,8 @@ L 556.560046 288.029604
 L 556.560046 310.188787
 L 592.125293 310.188787
 L 592.125293 350.989895
+L 608.971989 350.989895
+L 608.971989 350.989895
 " clip-path="url(#p7c5409e3f1)" style="fill: none; stroke: #b8ded9; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="line2d_44">
@@ -1131,6 +1133,8 @@ L 557.495974 158.766269
 L 557.495974 172.584622
 L 592.125293 172.584622
 L 592.125293 302.979285
+L 608.971989 302.979285
+L 608.971989 302.979285
 " clip-path="url(#p7c5409e3f1)" style="fill: none; stroke: #a9bed7; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="patch_3">
