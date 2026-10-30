@@ -1,0 +1,65 @@
+{
+  "retrieved_at": "2026-10-30",
+  "figure1": {
+    "title": "The plunging price of thought",
+    "authors": [
+      "Luke Emberson",
+      "David Roodman"
+    ],
+    "publisher": "Epoch AI",
+    "published": "2026-09-22",
+    "article_url": "https://epoch.ai/publications/the-plunging-price-of-thought",
+    "data_url": "https://raw.githubusercontent.com/droodman/inference-cost/9163c17ee7217b9f09ac51bcc71ed64c18c04bc8/output/slides/Figure%202.csv",
+    "upstream_commit": "9163c17ee7217b9f09ac51bcc71ed64c18c04bc8",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "raw_file": "raw/figure1_epoch_cost_records.csv",
+    "clean_file": "figure1_cost_records.csv",
+    "unit": "USD per benchmark task at or above a fixed chance-adjusted accuracy threshold",
+    "transformations": [
+      "Rename source columns: level -> threshold_adjusted_accuracy, model_label -> model, cost -> cost_usd_per_task, acc -> run_adjusted_accuracy.",
+      "Remove plotting-only columns label_drawn and trace_label. Preserve all 40 published record-setting data points."
+    ],
+    "caveats": [
+      "Threshold and run scores are adjusted above guessing probability: adjusted=(raw-floor)/(1-floor). GPQA floor is 0.25, AIME floor is 0.001, FrontierMath and chess floors are 0. A 75% adjusted GPQA threshold means 81.25% raw accuracy.",
+      "Dates are model/price-version dates in upstream data, not the dates the authors ran evaluations.",
+      "These are sampled record costs, not average customer prices or production costs. Connecting them as a staircase assumes previous records remain available until the next observed record.",
+      "Benchmark performance is not synonymous with economic usefulness; coverage, benchmark overfitting and budget-truncation methodology limit interpretation.",
+      "The per-task metric includes reasoning-token usage and differs from older USD/million-token series.",
+      "Upstream repository has no standalone LICENSE file; the publisher explicitly licenses this published work CC BY 4.0. Source data attribution is retained."
+    ],
+    "raw_file_sha256": "00d51d32b0ef9a8b9a2909061357f692319056fb33d4c9ddb18bc767b00aca8b",
+    "clean_file_sha256": "b47df28da4a733486d60b036dfa8466ac930596ecda68e0c227d9328410e980c"
+  },
+  "figure2": {
+    "title": "Electricity consumption by data centres, 2020-2035",
+    "authors": [
+      "International Energy Agency"
+    ],
+    "publisher": "IEA",
+    "updated": "2026-04-16",
+    "chart_url": "https://www.iea.org/data-and-statistics/charts/electricity-consumption-by-data-centres-2020-2035",
+    "report_url": "https://www.iea.org/reports/key-questions-on-energy-and-ai/executive-summary",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "raw_file": "raw/figure2_iea_electricity.csv",
+    "clean_file": "figure2_electricity.csv",
+    "unit": "TWh per year, all global data centres",
+    "transformations": [
+      "Extract the chart data-chart-csv HTML attribute verbatim to raw CSV; no values digitized or interpolated.",
+      "Historical values retained for 2020-2025. Forecast base case retained for 2026-2035.",
+      "For projections, case_low_twh=Blank; case_high_twh=Blank+Case range. These follow the original stacked chart configuration."
+    ],
+    "caveats": [
+      "Historical means IEA historical estimate, not a complete metered census.",
+      "The forecast band is the source's scenario range, not a statistical confidence interval.",
+      "All data-centre electricity is broader than AI-only consumption.",
+      "Use exact chart values: 485.1 TWh (2025) and 945.0 TWh (2030). The executive summary rounds them to 485 and 950 TWh.",
+      "Current draft presents source-supplied annual projections; future values are not observations.",
+      "The public chart has CSV download disabled but embeds the full licensed dataset in its HTML.",
+      "The independently rounded source components put the summed upper band 0.1 TWh below the base case in 2026-2028. Values are preserved; allow 0.1 TWh rounding tolerance rather than silently changing the data."
+    ],
+    "raw_file_sha256": "d7e780ab48321533b8dc4d4778c8011c3f6e21d9a6ff37233beb07d96b886063",
+    "clean_file_sha256": "23e5d670a2e763aa473ebffdf766691b423b0d54ec2bbf65e8ca373567d577a5"
+  }
+}

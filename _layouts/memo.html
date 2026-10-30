@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title | escape }} · fr8</title>
+    <meta name="description" content="{{ page.description | default: site.description | escape }}">
+    <link rel="stylesheet" href="{{ '/assets/memo.css' | relative_url }}">
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <main id="content">
+      <header>
+        <a class="wordmark" href="{{ '/' | relative_url }}">fr8</a>
+        <span>Research note · 30 October 2026</span>
+      </header>
+      <article>
+        <h1>{{ page.title }}</h1>
+        {{ content }}
+      </article>
+      <footer>
+        <a href="{{ '/sources.html' | relative_url }}">Sources &amp; methods</a>
+        <a href="https://github.com/kiankyars/fr8">Repository &amp; data</a>
+      </footer>
+    </main>
+  </body>
+</html>

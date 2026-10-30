@@ -1,0 +1,20 @@
+title: fr8
+description: A quantitative memo on cheap intelligence and the infrastructure that runs it.
+url: https://kiankyars.github.io
+baseurl: /fr8
+markdown: kramdown
+kramdown:
+  input: GFM
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: memo
+exclude:
+  - README.md
+  - CONTRIBUTING.md
+  - LICENSE
+  - requirements.txt
+  - scripts
+  - tests
+  - .venv

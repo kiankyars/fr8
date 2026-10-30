@@ -1,0 +1,17 @@
+year,historical_twh,base_case_twh,case_low_twh,case_high_twh,status
+2020,269.1,,,,historical estimate
+2021,297.0,,,,historical estimate
+2022,324.1,,,,historical estimate
+2023,360.4,,,,historical estimate
+2024,415.6,,,,historical estimate
+2025,485.1,,,,historical estimate
+2026,,560.0,548.6,559.9,projection
+2027,,664.4,639.9,664.3,projection
+2028,,773.0,711.4,772.9,projection
+2029,,862.4,772.5,885.5,projection
+2030,,945.0,832.8,1008.3,projection
+2031,,1012.5,868.1,1130.8,projection
+2032,,1075.0,894.9,1264.2,projection
+2033,,1119.3,912.5,1394.9,projection
+2034,,1161.5,934.7,1527.1,projection
+2035,,1192.9,942.0,1636.9,projection

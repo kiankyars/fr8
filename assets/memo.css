@@ -1,0 +1,30 @@
+:root { color-scheme: light; --ink: #202c35; --muted: #59656d; --rule: #dce2e3; --accent: #16625f; --paper: #fbfaf7; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 18px/1.7 Georgia, "Times New Roman", serif; }
+main { max-width: 850px; margin: 0 auto; padding: 45px 30px 28px; }
+header, footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; font: 12px/1.6 system-ui, sans-serif; color: var(--muted); }
+header { padding-bottom: 24px; border-bottom: 1px solid var(--rule); margin-bottom: 38px; }
+.wordmark { font-size: 15px; font-weight: 650; letter-spacing: .04em; text-decoration: none; color: var(--ink); }
+h1, h2, h3 { font-family: system-ui, sans-serif; line-height: 1.25; font-weight: 600; }
+h1 { font-size: clamp(28px, 5vw, 39px); letter-spacing: -.035em; margin: 0 0 25px; }
+h2 { font-size: 25px; letter-spacing: -.02em; margin: 56px 0 18px; }
+h3 { font-size: 19px; margin-top: 30px; }
+p { margin: 18px 0; }
+.thesis { font-size: 22px; line-height: 1.6; margin-bottom: 28px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+img { width: 100%; height: auto; display: block; margin: 28px 0 12px; }
+.caption { font: 13px/1.65 system-ui, sans-serif; color: var(--muted); margin: 8px 0 26px; }
+table { width: 100%; border-collapse: collapse; font: 14px/1.55 system-ui, sans-serif; margin: 24px 0; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+th { font-weight: 600; }
+td:first-child, th:first-child { padding-left: 0; }
+code { font-size: .82em; overflow-wrap: anywhere; }
+pre { overflow-x: auto; padding: 16px; background: #f0f1ed; line-height: 1.5; }
+li { margin: 8px 0; }
+footer { justify-content: flex-start; border-top: 1px solid var(--rule); margin-top: 55px; padding-top: 20px; }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { position: static; display: block; padding: 10px; }
+@media (max-width: 560px) { body { font-size: 17px; } main { padding: 25px 20px; } header { align-items: flex-start; gap: 12px; } header span { font-size: 10px; } h2 { font-size: 22px; } .thesis { font-size: 20px; } table { font-size: 12px; } th, td { padding: 8px 6px; } }
+@media print { body { background: white; font-size: 11pt; } main { max-width: none; padding: 0; } h2 { break-after: avoid; } img { break-inside: avoid; } footer, .skip { display: none; } }
