@@ -5,7 +5,7 @@ fr8 is bullish on the future of compute. In a future where intelligence is abund
 
 Epoch's September 2026 analysis estimates that this cost fell roughly **13-fold per year** across its selected benchmarks since 2023.
 
-[![Figure 1: Cost per question at fixed benchmark performance.](figures/01-inference-cost.svg)](figures/01-inference-cost.svg)
+[![](figures/01-inference-cost.svg)](figures/01-inference-cost.svg)
 
 **Figure 1.** Cost in United States dollars per question at fixed, chance-adjusted benchmark accuracy. GPQA is a graduate-level, Google-proof question-answering benchmark. AIME means American Invitational Mathematics Examination; these mock questions come from Olympiad Training for Individual Study (OTIS). [Source](https://epoch.ai/publications/the-plunging-price-of-thought)
 {: .caption }
@@ -14,7 +14,7 @@ Epoch's September 2026 analysis estimates that this cost fell roughly **13-fold 
 
 The International Energy Agency (IEA) estimates that global data-centre electricity consumption will go from **485 terawatt-hours (TWh) in 2025** to **945 TWh in 2030**. McKinsey projects that artificial intelligence (AI) workloads will account for about **70% of global data-centre capacity demand by 2030**. [Source](https://www.mckinsey.com/mgi/our-research/colocation-data-centers-the-infrastructure-race-behind-ai)
 
-[![Figure 2: Global data-centre electricity demand, with historical estimates separated from the IEA central projection.](figures/02-demand.svg)](figures/02-demand.svg)
+[![](figures/02-demand.svg)](figures/02-demand.svg)
 
 **Figure 2.** All data centres, including non-AI workloads. Dashed values are projections; the shaded scenario range is not a confidence interval. Electricity measures the physical footprint, not useful computation. [Source chart](https://www.iea.org/data-and-statistics/charts/electricity-consumption-by-data-centres-2020-2035) · [Data and method](https://github.com/kiankyars/fr8/blob/main/README.md#figure-2)
 {: .caption }
@@ -23,7 +23,7 @@ The International Energy Agency (IEA) estimates that global data-centre electric
 
 In the eight primary North American data-centre markets tracked by commercial-property firm CBRE (Coldwell Banker Richard Ellis), reported inventory rose from **5.17 gigawatts (GW) at the end of 2023 to 10.90 GW in mid-2026**, while vacancy fell from **3.7% to 1.4%**.
 
-[![Figure 3: Data-centre inventory and vacancy in CBRE's eight primary North American markets.](figures/03-scarcity.svg)](figures/03-scarcity.svg)
+[![](figures/03-scarcity.svg)](figures/03-scarcity.svg)
 
 **Figure 3.** Inventory and vacancy describe leasable data-centre capacity. Vacancy is not graphics processing unit (GPU) utilization or electrical load. Geography and the ability to deliver power matter; these eight markets are not the global market. [Source](https://www.cbre.com/insights/books/north-america-data-center-trends-h1-2026) · [Data and method](https://github.com/kiankyars/fr8/blob/main/README.md#figure-3)
 {: .caption }
@@ -34,7 +34,7 @@ Older GPUs are retaining earning power. CoreWeave renewed A100 capacity for **th
 
 Better software could make the same hardware more valuable. [Dwarkesh Patel argues](https://www.dwarkesh.com/p/why-compute-might-get-10x-more-expensive) that, if an H100-equivalent could run a human-level software engineer, its annual rental value could exceed **$250,000—about 15 times the spot price at the time**. That is a conditional scenario; the renewals are observed evidence of durable rental demand, rather than a measured rate of depreciation in chip resale values.
 
-[![Figure 4: A100 generation introduced in 2020, with a three-year renewal disclosed in 2026 extending into 2029.](figures/04-ownership.svg)](figures/04-ownership.svg)
+[![](figures/04-ownership.svg)](figures/04-ownership.svg)
 
 **Figure 4.** The 2029 contract endpoint is nine calendar years after the A100's 2020 introduction. This is the generation's age, not the operating age of each chip; exact contract dates were not disclosed. [NVIDIA launch](https://nvidianews.nvidia.com/news/nvidias-new-ampere-data-center-gpu-in-full-production) · [CoreWeave, slide 10](https://www.sec.gov/Archives/edgar/data/1769628/000176962826000429/crwv2026convertpresentat.htm) · [Data and method](https://github.com/kiankyars/fr8/blob/main/README.md#figure-4)
 {: .caption }
