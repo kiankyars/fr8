@@ -20,7 +20,7 @@ The International Energy Agency (IEA) estimates that global data-centre electric
 
 [![](figures/02-demand.svg)](figures/02-demand.svg)
 
-**Figure 2.** All data centres, including non-AI workloads. [Source chart](https://www.iea.org/data-and-statistics/charts/electricity-consumption-by-data-centres-2020-2035)
+**Figure 2.** All data centres, including non-AI workloads. [Source](https://www.iea.org/data-and-statistics/charts/electricity-consumption-by-data-centres-2020-2035)
 {: .caption }
 
 ## 3. Jevons' paradox
@@ -36,6 +36,8 @@ In the eight primary North American data-centre markets tracked by commercial-pr
 
 CoreWeave renewed A100 capacity for **three years, extending into 2029**, at pricing comparable to typical one-year contracts. Contrary to traditional 5-year depreciation timelines, NVIDIA introduced this GPU generation in **2020**. CoreWeave also reported renewing a contract for **more than 10,000 H100s within 5% of its original price**.[^renewals] [H100 source](https://s205.q4cdn.com/133937190/files/doc_financials/2025/q3/CORRECTED-TRANSCRIPT_-CoreWeave-Inc-CRWV-US-Q3-2025-Earnings-Call-10-November-2025-5_00-PM-ET.pdf)
 
-[Dwarkesh Patel argues](https://www.dwarkesh.com/p/why-compute-might-get-10x-more-expensive) that, if an H100-equivalent could run a human-level software engineer, its annual rental value could exceed **$250,000—about 15 times the spot price**. It remains to establish infrastructure which will retain an advantage, even under glut conditions.
+[Dwarkesh Patel argues](https://www.dwarkesh.com/p/why-compute-might-get-10x-more-expensive) that, if an H100-equivalent could run a human-level software engineer, its annual rental value could exceed **$250,000**.[^dwarkesh] It remains to establish infrastructure which will retain an advantage, even under glut conditions.
 
 [^renewals]: Renewals are evidence of durable rental demand; admittedly, this is only a proxy for chip depreciation.
+
+[^dwarkesh]: About 15 times the spot price.
