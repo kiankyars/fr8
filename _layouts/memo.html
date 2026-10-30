@@ -1,4 +1,6 @@
 <!doctype html>
+{% assign asset_version = site.time | date: '%s' %}
+{% assign versioned_svg = '.svg?v=' | append: asset_version | append: '"' %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -6,13 +8,13 @@
     <title>fr8</title>
     <meta name="description" content="{{ site.description | escape }}">
     <link rel="icon" href="{{ '/assets/fav-f.svg' | relative_url }}" type="image/svg+xml">
-    <link rel="stylesheet" href="{{ '/assets/memo.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/memo.css' | relative_url }}?v={{ asset_version }}">
   </head>
   <body>
     <a class="skip" href="#content">Skip to content</a>
     <main class="wrap" id="content">
       <a href="https://fr8.so" aria-label="fr8 home"><img class="logo" src="{{ '/assets/logo.svg' | relative_url }}" alt="fr8" width="62" height="14"></a>
-      <article>{{ content }}</article>
+      <article>{{ content | replace: '.svg"', versioned_svg }}</article>
       <footer><a href="https://github.com/kiankyars/fr8">Repository &amp; data</a></footer>
     </main>
   </body>
