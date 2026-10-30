@@ -88,6 +88,8 @@ python3 -m venv .venv
 .venv/bin/python scripts/verify.py
 ```
 
-The scripts use the committed source snapshots and require no live data requests. `prepare_data.py` regenerates the two transformed datasets; CBRE observations are already a source-cited transcription. `build_figures.py` regenerates the model CSV and all four SVG/PNG pairs. Change the explicit model assumptions to test a different case. GitHub Pages builds `index.md` and this methods page from `main` using Jekyll.
+The scripts use the committed source snapshots and require no live data requests. `prepare_data.py` regenerates the two transformed datasets; CBRE observations are already a source-cited transcription. `build_figures.py` regenerates the model CSV and all four SVG/PNG pairs. Change the explicit model assumptions to test a different case. GitHub Pages renders `index.md` as the single site page. This methods document remains in the repository.
 
 [Machine-readable provenance and hashes](data/figure1_figure2_sources.json) identify the original downloads and transformations. **Third-party data is not relicensed by this repository's CC0 dedication.** Epoch and IEA material retain [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); changes made here are the documented transformations, selection, and redrawing. The original model, prose, and scripts are CC0. No source endorses the memo's interpretation.
+
+The page styling, logo, and favicon are adapted from [fr8.so](https://fr8.so/privacy.html) and retain their original rights. Inter and JetBrains Mono retain their SIL Open Font Licenses.

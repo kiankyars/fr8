@@ -11,14 +11,14 @@ from ownership import generate as generate_ownership
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA, FIGURES = ROOT / "data", ROOT / "figures"
-PAPER, INK, MUTED = "#fbfaf7", "#202c35", "#59656d"
-GREEN, AMBER, BLUE = "#16625f", "#ad6830", "#426c9d"
+PAPER, INK, MUTED = "#000000", "#ffffff", "#8f8f8f"
+GREEN, AMBER, BLUE = "#b8ded9", "#d7bda0", "#a9bed7"
 plt.rcParams.update({
     "font.family": "DejaVu Sans", "font.size": 11,
     "axes.titlesize": 13, "axes.titleweight": "bold",
     "axes.labelcolor": INK, "text.color": INK,
     "xtick.color": MUTED, "ytick.color": MUTED,
-    "axes.edgecolor": "#cbd4d6", "axes.spines.top": False,
+    "axes.edgecolor": "#333333", "axes.spines.top": False,
     "axes.spines.right": False, "figure.facecolor": PAPER,
     "axes.facecolor": PAPER, "savefig.facecolor": PAPER,
     "svg.fonttype": "path", "svg.hashsalt": "fr8-2026-10-30", "text.parse_math": False,
@@ -31,7 +31,7 @@ def rows(name):
 
 
 def style(ax):
-    ax.grid(axis="y", color="#dce2e3", linewidth=0.7)
+    ax.grid(axis="y", color="#222222", linewidth=0.7)
     ax.set_axisbelow(True)
     ax.tick_params(length=0, pad=8)
 
@@ -137,9 +137,9 @@ def scarcity():
 def ownership():
     records = generate_ownership()
     fig, ax = plt.subplots(figsize=(10, 5.6))
-    ax.axhspan(100, 160, color="#dce2e3", alpha=0.5)
+    ax.axhspan(100, 160, color="#222222", alpha=0.5)
     ax.axhline(100, color=MUTED, linewidth=1, linestyle=":")
-    for life, color, line in [(3, AMBER, "-"), (5, BLUE, "-"), (10, GREEN, "-"), (20, "#835d8a", "--")]:
+    for life, color, line in [(3, AMBER, "-"), (5, BLUE, "-"), (10, GREEN, "-"), (20, "#c8b1d1", "--")]:
         series = [r for r in records if r["maximum_life_years"] == life]
         ax.plot([100 * r["annual_rental_price_change"] for r in series],
                 [100 * r["breakeven_utilization"] for r in series],

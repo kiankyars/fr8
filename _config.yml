@@ -18,3 +18,5 @@ exclude:
   - scripts
   - tests
   - .venv
+  - sources.md
+  - index.md
