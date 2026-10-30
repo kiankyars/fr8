@@ -7,7 +7,6 @@ matplotlib.use("Agg")
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter, PercentFormatter
-from ownership import generate as generate_ownership
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA, FIGURES = ROOT / "data", ROOT / "figures"
@@ -38,8 +37,10 @@ def style(ax):
 
 def save(fig, name, title, description):
     FIGURES.mkdir(exist_ok=True)
-    fig.savefig(FIGURES / f"{name}.svg", bbox_inches="tight",
+    svg_path = FIGURES / f"{name}.svg"
+    fig.savefig(svg_path, bbox_inches="tight",
                 metadata={"Date": None, "Title": title, "Description": description})
+    svg_path.write_text("\n".join(line.rstrip() for line in svg_path.read_text().splitlines()) + "\n")
     fig.savefig(FIGURES / f"{name}.png", dpi=190, bbox_inches="tight",
                 metadata={"Title": title, "Description": description})
     plt.close(fig)
@@ -64,13 +65,11 @@ def inference_cost():
     ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: f"${v:g}"))
     ax.xaxis.set_major_locator(mdates.MonthLocator(interval=3))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %Y"))
-    ax.set_ylabel("USD per question · logarithmic scale", labelpad=12)
-    ax.set_title("The cost of a fixed benchmark score keeps falling", loc="left", pad=70)
+    ax.set_ylabel("Dollars per question · logarithmic scale", labelpad=12)
     ax.legend(loc="lower left", bbox_to_anchor=(-0.02, 1.02), frameon=False, fontsize=10)
     style(ax)
-    fig.text(0.12, -0.035, "Source: Epoch AI (September 2026). Thresholds use chance-adjusted accuracy; distinct tasks.", color=MUTED, fontsize=9)
     save(fig, "01-inference-cost", "Cheaper benchmark performance",
-         "Cost records at fixed chance-adjusted accuracy, in USD per benchmark question. Logarithmic y-axis.")
+         "Cost records at fixed chance-adjusted accuracy, in US dollars per benchmark question. Logarithmic y-axis.")
 
 
 def demand():
@@ -90,32 +89,28 @@ def demand():
     for year, value in [historical[-1], next(p for p in forecast if p[0] == 2030)]:
         color = GREEN if year <= cutoff else BLUE
         ax.scatter([year], [value], color=color, zorder=3)
-        ax.annotate(f"{value:,.0f} TWh", (year, value), xytext=(0, 13), textcoords="offset points",
+        ax.annotate(f"{value:,.0f}", (year, value), xytext=(0, 13), textcoords="offset points",
                     ha="center", color=color, fontweight="bold")
-    ax.set_title("The physical footprint expands", loc="left", pad=25)
-    ax.set_ylabel("Global data-centre electricity · TWh/year", labelpad=12)
+    ax.set_ylabel("Electricity demand · terawatt-hours per year", labelpad=12)
     ax.set_ylim(bottom=0)
     ax.set_xlim(historical[0][0] - 0.3, forecast[-1][0] + 0.3)
     ax.set_xticks([2020, 2025, 2030, 2035])
     ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:,.0f}"))
     ax.legend(loc="upper left", frameon=False)
     style(ax)
-    fig.text(0.12, -0.035, "Source: IEA (2026). All data centres, not AI alone. Projection is a scenario, not an observed outcome.", color=MUTED, fontsize=9)
     save(fig, "02-demand", "Growing electricity demand",
-         "Global data-centre electricity demand: historical estimates and the IEA central projection in TWh per year.")
+         "Global data-centre electricity demand: historical estimates and the IEA central projection in terawatt-hours per year.")
 
 
 def scarcity():
     records = rows("figure3_capacity_vacancy.csv")
     dates = [datetime.fromisoformat(r["period_end"]) for r in records]
-    labels = [r["period"].replace(" ", "\n") for r in records]
+    labels = [date.strftime("%B\n%Y") for date in dates]
     capacity = [float(r["inventory_mw"]) / 1000 for r in records]
     vacancy = [float(r["vacancy_pct"]) for r in records]
     fig, axes = plt.subplots(1, 2, figsize=(10, 4.6), gridspec_kw={"wspace": 0.32})
-    fig.suptitle("Capacity more than doubled; vacancy still fell", x=0.12, ha="left", fontsize=15, fontweight="bold", y=1.1)
-    fig.text(0.12, 1.01, "CBRE's eight primary U.S. wholesale-colocation markets", color=MUTED, fontsize=11)
     axes[0].bar(dates, capacity, color=GREEN, width=95)
-    axes[0].set_title("Inventory · GW", loc="left", pad=18)
+    axes[0].set_title("Inventory · gigawatts", loc="left", pad=18)
     axes[0].set_ylim(0, 12.5)
     for date, value in zip(dates, capacity):
         axes[0].text(date, value + 0.28, f"{value:.2f}", ha="center", fontsize=11, fontweight="bold")
@@ -129,42 +124,40 @@ def scarcity():
         ax.set_xticks(dates, labels)
         style(ax)
         ax.tick_params(axis="x", labelsize=9)
-    fig.text(0.12, -0.08, "Source: CBRE report snapshots, 2023–26. Vacancy describes leasing, not hardware utilization.", color=MUTED, fontsize=9)
     save(fig, "03-scarcity", "Supply and scarcity",
          "Reported data-centre inventory and vacancy in eight primary U.S. markets, H2 2023 through H1 2026.")
 
 
-def ownership():
-    records = generate_ownership()
-    fig, ax = plt.subplots(figsize=(10, 5.6))
-    ax.axhspan(100, 160, color="#222222", alpha=0.5)
-    ax.axhline(100, color=MUTED, linewidth=1, linestyle=":")
-    for life, color, line in [(3, AMBER, "-"), (5, BLUE, "-"), (10, GREEN, "-"), (20, "#c8b1d1", "--")]:
-        series = [r for r in records if r["maximum_life_years"] == life]
-        ax.plot([100 * r["annual_rental_price_change"] for r in series],
-                [100 * r["breakeven_utilization"] for r in series],
-                label=f"{life}-year maximum life", color=color, linewidth=2.3, linestyle=line)
-    ax.text(-28, 148, "Above 100%: cannot recover capital at the required return", fontsize=10, color=MUTED)
-    ax.set_title("Long life helps only while cash flows remain valuable", loc="left", pad=54)
-    ax.text(0, 1.05, "ILLUSTRATIVE MODEL · required utilization to earn a 10% return", transform=ax.transAxes,
-            color=MUTED, fontsize=11)
-    ax.set_xlabel("Annual change in realized rental price", labelpad=12)
-    ax.set_ylabel("Break-even utilization", labelpad=12)
-    ax.set_ylim(0, 160)
-    ax.set_xlim(-30, 5)
-    ax.set_xticks([-30, -20, -10, 0, 5])
-    ax.xaxis.set_major_formatter(FuncFormatter(lambda value, _: f"{value:+g}%" if value else "0%"))
-    ax.yaxis.set_major_formatter(PercentFormatter(xmax=100, decimals=0))
-    ax.legend(loc="lower left", frameon=False, fontsize=10, ncol=2)
-    style(ax)
-    fig.text(0.12, -0.07, "Assumed per $100 invested: year-one revenue $60 and variable cost $10 at full use; fixed cost $3/year.\nZero residual value; early retirement allowed. Single capital cycle. Not observed asset-class returns.",
-             fontsize=9, color=MUTED, linespacing=1.65)
-    save(fig, "04-ownership", "Conditional ownership economics",
-         "Illustrative break-even utilization by annual rental-price change and maximum productive life. Values above 100 percent are infeasible.")
+def hardware_longevity():
+    events = {row["event_id"]: row for row in rows("figure4_hardware_longevity.csv")}
+    introduction = events["architecture_introduced"]
+    disclosure = events["renewal_disclosed"]
+    endpoint = events["contract_endpoint"]
+    start, renewal, end = [int(event["event_year"]) for event in (introduction, disclosure, endpoint)]
+    term = int(disclosure["contract_term_years"])
+
+    fig, ax = plt.subplots(figsize=(10, 3.0))
+    ax.plot([start, renewal], [0, 0], color="#555555", linewidth=3, solid_capstyle="butt")
+    ax.plot([renewal, end], [0, 0], color=GREEN, linewidth=8, solid_capstyle="butt")
+    for event, year, color in [(introduction, start, MUTED), (disclosure, renewal, GREEN), (endpoint, end, GREEN)]:
+        ax.scatter(year, 0, s=95, color=color, edgecolor=PAPER, linewidth=1.5, zorder=3)
+        ax.annotate(event["label"], (year, 0), xytext=(0, 28), textcoords="offset points",
+                    ha="center", va="bottom", color=color, fontsize=11)
+        ax.annotate(str(year), (year, 0), xytext=(0, -22), textcoords="offset points",
+                    ha="center", va="top", color=color, fontsize=13, fontweight="bold")
+    ax.text((renewal + end) / 2, -0.55,
+            f"{term}-year renewal\nAt typical 1-year pricing", ha="center", va="top",
+            color=GREEN, fontsize=11, linespacing=1.5)
+    ax.set_xlim(start - 0.9, end + 1.0)
+    ax.set_ylim(-1.0, 0.8)
+    ax.axis("off")
+    save(fig, "04-ownership", "A100 architecture and contract timeline",
+         "A100 architecture introduced in 2020; a three-year renewal disclosed in 2026 extends into 2029. "
+         "The highlighted interval is a year-level illustration, not exact contract dates or the age of individual GPUs.")
 
 
 if __name__ == "__main__":
     inference_cost()
     demand()
     scarcity()
-    ownership()
+    hardware_longevity()
